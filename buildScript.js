@@ -1,0 +1,17 @@
+const execSync = require("child_process").execSync
+
+const installDockerCommand = "sudo apt-get update && sudo apt-get install -qy docker.io"
+const startDockerDaemonCommand = "sudo systemctl start docker"
+const startFabricCommand = "sh startFabric.sh"
+const enrollAdminCommand = "node enrollAdmin.js"
+const registerUserCommand = "node registerUser.js"
+const runServerCommand = "node server-boilerplate.js"
+
+const arr = [installDockerCommand,startDockerDaemonCommand,startFabricCommand,enrollAdminCommand,registerUserCommand,runServerCommand]
+
+arr.map(execSync)
+
+
+
+
+
