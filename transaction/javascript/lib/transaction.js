@@ -4,33 +4,30 @@
 
 const { Contract } = require('fabric-contract-api');
 
-class ClaimRequest extends Contract {
+class Transaction extends Contract {
 
     async initLedger(ctx) {
         console.info('============= START : Initialize Ledger ===========');
-        const claimRequests = [
+        const transactions = [
             {
                 id: '01',
-                patient_first_name: 'First',
+                patient_first_name: 'Test',
                 patient_last_name: 'Last',
-                patient_email: 'first@a.com',
-                patient_visible: 'true',
-                policy_name: 'test',
-                policy_discount: '20',
-                approved: 'true',
-                requested: 'true',
-                date: 'test',
+                patient_email: 'test@a.com',
+                case_number: '12',
+                amount: '123',
+                status: 'done'
             }
         ];
 
-        for (let i = 0; i < claimRequests.length; i++) {
-            await ctx.stub.putState('STD' + i, Buffer.from(JSON.stringify(claimRequests[i])));
-            console.info('Added <--> ', claimRequests[i]);
+        for (let i = 0; i < transactions.length; i++) {
+            await ctx.stub.putState('STD' + i, Buffer.from(JSON.stringify(transactions[i])));
+            console.info('Added <--> ', transactions[i]);
         }
         console.info('============= END : Initialize Ledger ===========');
     }
 
-    async queryclaimRequest(ctx, id) {
+    async queryTransaction(ctx, id) {
         const stdAsBytes = await ctx.stub.getState(id); // get the std from chaincode state
         if (!stdAsBytes || stdAsBytes.length === 0) {
             throw new Error(`${id} does not exist`);
@@ -39,27 +36,24 @@ class ClaimRequest extends Contract {
         return stdAsBytes.toString();
     }
 
-    async createClaimRequest(ctx, id, patient_first_name, patient_last_name, patient_email, patient_visible, policy_name, policy_discount, approved, requested, date) {
+    async createTransaction(ctx, id, patient_first_name, patient_last_name, patient_email, case_number, amount, status) {
         console.info('============= START : Create std ===========');
 
-        const claimRequest = {
+        const transaction = {
             id,
             patient_first_name,
             patient_last_name,
             patient_email,
-            patient_visible,
-            policy_name,
-            policy_discount,
-            approved,
-            requested,
-            date
+            case_number,
+            amount,
+            status
         };
 
-        await ctx.stub.putState(id, Buffer.from(JSON.stringify(claimRequest)));
+        await ctx.stub.putState(id, Buffer.from(JSON.stringify(transaction)));
         console.info('============= END : Create std ===========');
     }
 
-    async queryAllClaimRequests(ctx) {
+    async queryAllTransactions(ctx) {
         const startKey = '';
         const endKey = '';
         const allResults = [];
@@ -80,5 +74,5 @@ class ClaimRequest extends Contract {
 
 }
 
-module.exports = ClaimRequest;
+module.exports = Transaction;
 
