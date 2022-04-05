@@ -22,7 +22,8 @@ class DiagnosisReport extends Contract {
                 patient_email_id: 'test1@a.com',
                 doctor_phone_number: '123',
                 diagnosis_comments: 'Test',
-                recommended_tests: 'XY'
+                recommended_tests: 'XY',
+                approved: "true"
             }
         ];
 
@@ -43,7 +44,7 @@ class DiagnosisReport extends Contract {
     }
 
     async createDiagnosisReport(ctx, id, patient_first_name, patient_last_name, birthdate, age, gender, doctor_first_name, 
-        doctor_last_name, doctor_email_id, patient_email_id, doctor_phone_number, diagnosis_comments, recommended_tests) {
+        doctor_last_name, doctor_email_id, patient_email_id, doctor_phone_number, diagnosis_comments, recommended_tests, approved) {
         console.info('============= START : Create std ===========');
 
         const diagnosisReport = {
@@ -59,7 +60,8 @@ class DiagnosisReport extends Contract {
             patient_email_id,
             doctor_phone_number,
             diagnosis_comments,
-            recommended_tests
+            recommended_tests,
+            approved
         };
 
         await ctx.stub.putState(id, Buffer.from(JSON.stringify(diagnosisReport)));

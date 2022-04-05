@@ -262,7 +262,8 @@ app.post('/createDiagnosisReport', async function (req, res) {
             req.body.patient_email_id,
             req.body.doctor_phone_number,
             req.body.diagnosis_comments,
-            req.body.recommended_tests
+            req.body.recommended_tests,
+            req.body.approved
         )
         console.log('Diagnosis Report Transaction has been submitted')
         res.status(201).json({
