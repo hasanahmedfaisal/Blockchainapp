@@ -7,7 +7,7 @@ const enrollAdminCommand = "node enrollAdmin.js"
 const registerUserCommand = "node registerUser.js"
 const runServerCommand = "node server-boilerplate.js"
 
-const arr = [enrollAdminCommand,registerUserCommand,runServerCommand]
+const arr = [startFabricCommand,enrollAdminCommand,registerUserCommand,runServerCommand]
 
 arr.map(command => execSync(command, { stdio: 'inherit' } ))
 

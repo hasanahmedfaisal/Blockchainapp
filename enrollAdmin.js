@@ -10,6 +10,8 @@ const FabricCAServices = require('fabric-ca-client');
 const { Wallets } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config();
+
 
 async function main() {
     try {
@@ -35,7 +37,7 @@ async function main() {
         }
 
         // Enroll the admin user, and import the new identity into the wallet.
-        const enrollment = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: 'adminpw' });
+        const enrollment = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: process.env.ENROLLMENT_SECRET });
         const x509Identity = {
             credentials: {
                 certificate: enrollment.certificate,

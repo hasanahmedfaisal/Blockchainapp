@@ -9,7 +9,8 @@ app.use(bodyParser.json())
 const { Gateway, Wallets } = require('fabric-network')
 const path = require('path')
 const fs = require('fs')
-const { error } = require('console')
+require('dotenv').config();
+
 
 app.get('/', async function (req, res) {
     try {
@@ -26,7 +27,7 @@ app.post('/createClaimRequest', async function (req, res) {
     try {
         const username = req.body.username
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, 'blockchain-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf-8'))
 
         // Create a new file system based wallet for managing identities.
@@ -96,7 +97,7 @@ app.get('/queryClaimRequest', async function (req, res) {
     try {
         const username = req.body.username
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, 'blockchain-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf-8'))
 
         // Create a new file system based wallet for managing identities.
@@ -154,7 +155,7 @@ app.get('/queryAllClaimRequest', async function (req, res) {
     try {
         const username = req.body.username
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, 'blockchain-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf-8'))
 
         // Create a new file system based wallet for managing identities.
@@ -212,7 +213,7 @@ app.post('/createDiagnosisReport', async function (req, res) {
     try {
         const username = req.body.username
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, 'blockchain-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf-8'))
 
         // Create a new file system based wallet for managing identities.
@@ -286,7 +287,7 @@ app.get('/queryDiagnosisReport', async function (req, res) {
     try {
         const username = req.body.username
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, 'blockchain-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf-8'))
 
         // Create a new file system based wallet for managing identities.
@@ -344,7 +345,7 @@ app.get('/queryAllDiagnosisReports', async function (req, res) {
     try {
         const username = req.body.username
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, 'blockchain-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf-8'))
 
         // Create a new file system based wallet for managing identities.
@@ -402,7 +403,7 @@ app.post('/createTransacton', async function (req, res) {
     try {
         const username = req.body.username
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, 'blockchain-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf-8'))
 
         // Create a new file system based wallet for managing identities.
@@ -469,10 +470,10 @@ app.get('/queryTransaction', async function (req, res) {
     try {
         const username = req.body.username
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, 'blockchain-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf-8'))
 
-        // Create a new file system based wallet for managing identities.
+        // Create a new file system based wallet for managing identities.j
         const walletPath = path.join(process.cwd(), 'wallet')
         const wallet = await Wallets.newFileSystemWallet(walletPath)
         console.log(`Wallet path: ${walletPath}`)
@@ -527,7 +528,7 @@ app.get('/queryAllTransactions', async function (req, res) {
     try {
         const username = req.body.username
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, 'blockchain-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf-8'))
 
         // Create a new file system based wallet for managing identities.
@@ -581,8 +582,10 @@ app.get('/queryAllTransactions', async function (req, res) {
     }
 })
 
-const port = process.env.PORT || 80
-app.listen(port, '0.0.0.0');
+const port = process.env.PORT || 8081
+const address = process.env.PROD ? '0.0.0.0' : 'localhost'
+
+app.listen(port, address);
 console.log(`Chaincode Server Running on http://localhost:${port}`);
 
 

@@ -105,4 +105,14 @@ dist
 
 wallet/
 
+bin/
+
+config/
+
 .DS_Store
+
+CHAINCODE_AS_A_SERVICE_TUTORIAL.md
+
+.gcloudignore
+
+.env
