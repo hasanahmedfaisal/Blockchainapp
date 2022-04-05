@@ -581,7 +581,7 @@ app.get('/queryAllTransactions', async function (req, res) {
     }
 })
 
-const port = process.env.PORT || 8081
+const port = process.env.PORT || 80
 app.listen(port, '0.0.0.0');
 console.log(`Chaincode Server Running on http://localhost:${port}`);
 
