@@ -8,7 +8,7 @@ Before you can deploy the test network, you need to follow the instructions to [
 
 The `setOrgEnv.sh` script can be used to setup the environment variables for the ogrganziations, this will will help to be able to use the `peer` commands directly.
 
-First, ensure that the peer binaries are on your path, and the Fabric Config path is set Assuming that you're in the `test-network` directory.
+First, ensure that the peer binaries are on your path, and the Fabric Config path is set Assuming that you're in the `blockchain-network` directory.
 
 ```bash
  export PATH=$PATH:$(realpath ../bin)
@@ -28,14 +28,14 @@ The `setOrgEnv` script outputs a series of `<name>=<value>` strings. These can t
 
 ## Chaincode-as-a-service
 
-To learn more about how to use the improvements to the Chaincode-as-a-service please see this [tutorial](./test-network/../CHAINCODE_AS_A_SERVICE_TUTORIAL.md). It is expected that this will move to augment the tutorial in the [Hyperledger Fabric ReadTheDocs](https://hyperledger-fabric.readthedocs.io/en/release-2.4/cc_service.html)
+To learn more about how to use the improvements to the Chaincode-as-a-service please see this [tutorial](./blockchain-network/../CHAINCODE_AS_A_SERVICE_TUTORIAL.md). It is expected that this will move to augment the tutorial in the [Hyperledger Fabric ReadTheDocs](https://hyperledger-fabric.readthedocs.io/en/release-2.4/cc_service.html)
 
 
 ## Podman
 
 *Note - podman support should be considered experimental. There are issues with volume mounting on MacOS that prevent this working. If wish to use podman a LinuxVM is suggested.*
 
-A copy of the `install_fabric.sh` script is in the `test-network` directory. This has been enhanced to support a `podman` argument; if used it will use the `podman` command to pull down images and tag them rather than docker. The images are the same, just pulled differently
+A copy of the `install_fabric.sh` script is in the `blockchain-network` directory. This has been enhanced to support a `podman` argument; if used it will use the `podman` command to pull down images and tag them rather than docker. The images are the same, just pulled differently
 
 The `network.sh` script has been enhanced so that it can use `podman` and `podman-compose` instead of docker. Ensure that `CONTAINER_CLI` is set as below when running `network.sh` script. 
 
